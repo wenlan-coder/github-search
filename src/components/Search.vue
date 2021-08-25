@@ -23,7 +23,7 @@ export default {
     },
     methods:{
         onSearch(){
-            this.$bus.$emit('userInfo',{user:[],laoding:true,spining:true,errMessage:""})
+            this.$bus.$emit('userInfo',{user:[],loading:true,spining:true,errMessage:"",isHome:false})
             // console.log("search");
             // console.log(this.keyword);
             // axios.get(`https://api.github.com/search/users?q=${this.keyword}`)
@@ -33,10 +33,11 @@ export default {
                     
                 }
                 }).then((res) => {
+                this.$bus.$emit('userInfo',{user:res.data.items,laoding:true,spining:false,errMessage:""})
                 this.$message.success('sccess search',1);
-                console.log(res.data.items);
-                this.user=res.data.items;
-                 this.$bus.$emit('userInfo',{user:res.data.items,laoding:false,spining:false,errMessage:""})
+                // console.log(res.data.items);
+                // this.user=res.data.items;
+                 
                 // console.log(this.user);
                 
             }).catch((err) => {

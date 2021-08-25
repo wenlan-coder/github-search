@@ -6,6 +6,7 @@
            <a :href="item.html_url" target="_blank" class="demo"  v-for="item in info.user" :key="item.id">
     <a-card hoverable activeTabKey v-for="item in info.user" :key="item.id"  style="width:25%;margin:10px"  :loading="info.loading">
         <img
+        v-show="!info.loading"
       style="padding:10px"
       slot="cover"
       alt="example"
@@ -18,9 +19,16 @@
        </a-spin>
   <a-result status="404" :title="info.errMessage"  v-show="info.isErr">
     <template #extra>
-      <a-button key="console" type="primary" @click="refresh">
+      <a-button key="console" type="danger">
         please input again
       </a-button>
+    </template>
+  </a-result>
+  <a-result title="Great, welcome to github-search!" style="marginTop:80px" v-show="info.isHome">
+    <template #icon>
+      <a-icon type="smile" theme="twoTone" />
+    </template>
+    <template #extra>
     </template>
   </a-result>
     </div>
@@ -32,10 +40,10 @@ export default {
         return{
            info:{
             user:[],
-            loading:false,
             spining:false,
             errMessage:'',
-            isErr:false
+            isErr:false,
+            isHome:true,
            }
         }
     },
@@ -44,8 +52,8 @@ export default {
     },
     mounted(){
         this.$bus.$on('userInfo',(dataObj)=>{
-        //    this.info=dataObj;
-        this.info= {...this.info,...dataObj}
+           this.info=dataObj;
+        // this.info= {...this.info,...dataObj}
            console.log(dataObj);
         })
    
