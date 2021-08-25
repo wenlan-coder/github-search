@@ -1,17 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <search></search>
+    <list></list>
+    <!-- <demo></demo> -->
+    
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import List from './components/List.vue'
+import Search from './components/Search.vue'
+// import Demo from './components/Demo.vue'
+
 
 export default {
   name: 'App',
+  created(){
+     this.$notification.open({
+        message: 'Notification Title',
+        description:
+          'welecome to github search',
+        icon: <a-icon type="smile" style="color: #108ee9" />,
+        placement:"topLeft",
+        top:'100px',
+      });
+
+  },
   components: {
-    HelloWorld
+    Search,
+    List,
+    
   }
 }
 </script>
@@ -23,6 +42,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
